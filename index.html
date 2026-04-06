@@ -1,0 +1,616 @@
+
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Алексей Смирнов — UI/UX дизайнер и front-end разработчик</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --bg-soft: rgba(255, 255, 255, 0.05);
+      --card: rgba(255, 255, 255, 0.07);
+      --card-strong: rgba(255, 255, 255, 0.1);
+      --text: #eef2ff;
+      --muted: #a7b0d6;
+      --line: rgba(255, 255, 255, 0.08);
+      --accent: #7c3aed;
+      --accent-2: #06b6d4;
+      --accent-3: #ec4899;
+      --shadow: 0 20px 60px rgba(2, 6, 23, 0.45);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --max-width: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(124, 58, 237, 0.22), transparent 28%),
+        radial-gradient(circle at top right, rgba(6, 182, 212, 0.18), transparent 26%),
+        radial-gradient(circle at bottom center, rgba(236, 72, 153, 0.12), transparent 24%),
+        linear-gradient(135deg, #070b16 0%, #0b1020 45%, #10172d 100%);
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+      background-size: 36px 36px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.08));
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      width: min(var(--max-width), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .section {
+      margin-bottom: 28px;
+    }
+
+    .hero {
+      padding: 42px 0 28px;
+    }
+
+    .hero-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      backdrop-filter: blur(16px);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      padding: 56px;
+      isolation: isolate;
+    }
+
+    .hero-card::before,
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(30px);
+      opacity: 0.55;
+      z-index: -1;
+    }
+
+    .hero-card::before {
+      width: 240px;
+      height: 240px;
+      right: -40px;
+      top: -40px;
+      background: radial-gradient(circle, rgba(124,58,237,0.65), transparent 65%);
+    }
+
+    .hero-card::after {
+      width: 220px;
+      height: 220px;
+      left: -60px;
+      bottom: -70px;
+      background: radial-gradient(circle, rgba(6,182,212,0.45), transparent 65%);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--muted);
+      font-size: 14px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 20px rgba(124, 58, 237, 0.55);
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(40px, 7vw, 76px);
+      line-height: 0.95;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      background: linear-gradient(90deg, #ffffff 0%, #bde7ff 25%, #9d7bff 55%, #67e8f9 82%, #ffffff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+      opacity: 0.98;
+    }
+
+    .subtitle {
+      font-size: clamp(18px, 2.6vw, 28px);
+      color: #dbe4ff;
+      margin: 0 0 20px;
+      font-weight: 600;
+    }
+
+    .lead {
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.8;
+      margin: 0 0 28px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .meta-pill {
+      padding: 12px 16px;
+      border-radius: 999px;
+      font-size: 14px;
+      color: #dfe7ff;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+    }
+
+    .meta-pill:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.09);
+      border-color: rgba(255,255,255,0.14);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 28px;
+      margin-bottom: 28px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.04));
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 18px;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .section-title::before {
+      content: "";
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 22px rgba(6, 182, 212, 0.28);
+      flex-shrink: 0;
+    }
+
+    .about-text {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.85;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .skill-card {
+      position: relative;
+      overflow: hidden;
+      padding: 20px 18px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+      cursor: default;
+    }
+
+    .skill-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(124,58,237,0.18), rgba(6,182,212,0.1), rgba(236,72,153,0.14));
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-8px) scale(1.01);
+      box-shadow: 0 18px 40px rgba(2, 6, 23, 0.38);
+      border-color: rgba(151, 123, 255, 0.28);
+    }
+
+    .skill-card:hover::before {
+      opacity: 1;
+    }
+
+    .skill-card span {
+      position: relative;
+      z-index: 1;
+      display: block;
+      font-size: 16px;
+      font-weight: 600;
+      color: #eff3ff;
+    }
+
+    .cases {
+      display: grid;
+      gap: 16px;
+    }
+
+    .case-item {
+      position: relative;
+      padding: 22px 22px 22px 24px;
+      border-radius: 18px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.05));
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: transform 0.28s ease, border-color 0.28s ease, background 0.28s ease;
+    }
+
+    .case-item::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 16px;
+      bottom: 16px;
+      width: 4px;
+      border-radius: 999px;
+      background: linear-gradient(to bottom, var(--accent), var(--accent-2));
+      box-shadow: 0 0 24px rgba(124,58,237,0.45);
+    }
+
+    .case-item:hover {
+      transform: translateY(-4px);
+      border-color: rgba(6,182,212,0.22);
+      background: linear-gradient(180deg, rgba(255,255,255,0.1), rgba(255,255,255,0.055));
+    }
+
+    .case-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      margin-bottom: 14px;
+      font-weight: 700;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #ffffff;
+    }
+
+    .case-text {
+      margin: 0;
+      color: #dce4ff;
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    .accent {
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .tools-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .tool-tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 16px;
+      border-radius: 999px;
+      font-size: 14px;
+      color: #e9eeff;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: transform 0.22s ease, background 0.22s ease, border-color 0.22s ease;
+    }
+
+    .tool-tag:hover {
+      transform: translateY(-3px);
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(124,58,237,0.22);
+    }
+
+    .contacts-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 20px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: transform 0.25s ease, background 0.25s ease;
+    }
+
+    .contact-item:hover {
+      transform: translateX(4px);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .contact-label {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .contact-value,
+    .contact-value a {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 600;
+      word-break: break-word;
+    }
+
+    .footer-note {
+      text-align: center;
+      color: rgba(220, 228, 255, 0.58);
+      font-size: 13px;
+      padding: 12px 0 36px;
+    }
+
+    @media (max-width: 980px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card {
+        padding: 40px 28px;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        width: min(100% - 20px, var(--max-width));
+      }
+
+      .hero {
+        padding-top: 20px;
+      }
+
+      .hero-card {
+        padding: 28px 18px;
+        border-radius: 22px;
+      }
+
+      .subtitle {
+        line-height: 1.3;
+      }
+
+      .lead {
+        font-size: 15px;
+        line-height: 1.75;
+      }
+
+      .card {
+        padding: 22px 18px;
+        border-radius: 18px;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-title {
+        font-size: 20px;
+      }
+
+      .contact-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .tool-tag,
+      .meta-pill {
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="hero section">
+      <div class="hero-card">
+        <div class="eyebrow">Портфолио специалиста</div>
+        <h1>Алексей Смирнов</h1>
+        <p class="subtitle">UI/UX дизайнер и front-end разработчик</p>
+        <p class="lead">
+          Создаю современные, удобные и визуально выразительные цифровые интерфейсы для бизнеса,
+          стартапов и личных брендов. Специализируюсь на разработке адаптивных сайтов, дизайне
+          лендингов, интерфейсах мобильных приложений и улучшении пользовательского опыта.
+        </p>
+
+        <div class="hero-meta">
+          <div class="meta-pill">Современный UI</div>
+          <div class="meta-pill">Адаптивная верстка</div>
+          <div class="meta-pill">UX-ориентированный подход</div>
+          <div class="meta-pill">Визуальная эстетика</div>
+        </div>
+      </div>
+    </header>
+
+    <section class="grid section">
+      <div class="card">
+        <h2 class="section-title">Обо мне</h2>
+        <p class="about-text">
+          Я работаю на пересечении эстетики и функциональности, помогая превращать идеи в
+          продуманные цифровые продукты. Мой подход сочетает чистую визуальную подачу,
+          внимание к деталям и понятный пользовательский сценарий, благодаря чему дизайн
+          не только выглядит эффектно, но и решает бизнес-задачи.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2 class="section-title">Навыки</h2>
+        <div class="skills-grid">
+          <div class="skill-card"><span>UI/UX дизайн</span></div>
+          <div class="skill-card"><span>Веб-дизайн</span></div>
+          <div class="skill-card"><span>HTML / CSS / JavaScript</span></div>
+          <div class="skill-card"><span>Адаптивная верстка</span></div>
+          <div class="skill-card"><span>Дизайн-системы</span></div>
+          <div class="skill-card"><span>Figma</span></div>
+          <div class="skill-card"><span>Анимация интерфейсов</span></div>
+          <div class="skill-card"><span>Прототипирование</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="card">
+        <h2 class="section-title">Кейсы</h2>
+        <div class="cases">
+          <article class="case-item">
+            <div class="case-number">01</div>
+            <p class="case-text">
+              Разработал лендинг для IT-компании, что повысило
+              <span class="accent">конверсию заявок на 32%</span>.
+            </p>
+          </article>
+
+          <article class="case-item">
+            <div class="case-number">02</div>
+            <p class="case-text">
+              Создал интерфейс мобильного приложения для сервиса доставки,
+              сократив <span class="accent">путь пользователя до заказа в 2 раза</span>.
+            </p>
+          </article>
+
+          <article class="case-item">
+            <div class="case-number">03</div>
+            <p class="case-text">
+              Спроектировал корпоративный сайт для консалтинговой компании
+              в <span class="accent">современном минималистичном стиле</span>.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid section">
+      <div class="card">
+        <h2 class="section-title">Инструменты</h2>
+        <div class="tools-wrap">
+          <span class="tool-tag">Figma</span>
+          <span class="tool-tag">Adobe Photoshop</span>
+          <span class="tool-tag">Adobe Illustrator</span>
+          <span class="tool-tag">HTML5</span>
+          <span class="tool-tag">CSS3</span>
+          <span class="tool-tag">JavaScript</span>
+          <span class="tool-tag">Webflow</span>
+          <span class="tool-tag">Tilda</span>
+          <span class="tool-tag">Notion</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="section-title">Контакты</h2>
+        <div class="contacts-list">
+          <div class="contact-item">
+            <div>
+              <div class="contact-label">Email</div>
+              <div class="contact-value">
+                <a href="mailto:alexey@example.com">alexey@example.com</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div>
+              <div class="contact-label">Telegram</div>
+              <div class="contact-value">
+                <a href="https://t.me/alexeydesign" target="_blank" rel="noopener noreferrer">@alexeydesign</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div>
+              <div class="contact-label">Behance</div>
+              <div class="contact-value">
+                <a href="https://www.behance.net/alexeydesign" target="_blank" rel="noopener noreferrer">
+                  behance.net/alexeydesign
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer-note">
+      Дорогой, современный и минималистичный визуальный стиль для персональной презентации специалиста.
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.skill-card, .tool-tag, .case-item, .contact-item').forEach((item) => {
+      item.addEventListener('mousemove', (e) => {
+        const rect = item.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        item.style.backgroundImage =
+          `radial-gradient(circle at ${x}% ${y}%, rgba(255,255,255,0.12), rgba(255,255,255,0.05) 42%)`;
+      });
+
+      item.addEventListener('mouseleave', () => {
+        item.style.backgroundImage = '';
+      });
+    });
+  </script>
+</body>
+</html>
